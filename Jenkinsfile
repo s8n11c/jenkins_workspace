@@ -8,14 +8,23 @@ pipeline{
     }
 
     stages {
-    	agent {
+
+
+	stage('Build') {
+		agent {
           label 'debian_docker'
         }
-	stage('Build') {
+
 	    steps {
 		echo 'Building.... '
 		sh 'ant '
 	    }
+
+	    post {
+    	success{
+    		archiveArtifacts artifacts:  'dist/*.jar' ,fingerprint: true
+    		}
+   		 }
       }
 
     stage('Testing '){
@@ -44,10 +53,6 @@ pipeline{
     }
 
 
-    post  {
-    	always{
-    		archiveArtifacts artifacts:  'dist/*.jar' ,fingerprint: true
-    	}
-    }
+
 
   }
