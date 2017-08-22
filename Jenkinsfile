@@ -8,6 +8,9 @@ pipeline{
     }
 
     stages {
+    	agent {
+          label 'debian_docker'
+        }
 	stage('Build') {
 	    steps {
 		echo 'Building.... '
@@ -16,11 +19,15 @@ pipeline{
       }
 
     stage('Testing '){
+    	agent {
+          label 'debian_docker'
+        }
     	steps {
     	echo 'testing'
     	sh 'ant -f test.xml -v '
     	junit 'reports/result.xml'
     	}	
+
       }  
 
     stage('Deploying'){
