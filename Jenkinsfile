@@ -46,8 +46,8 @@ pipeline{
 
     	steps{
     	  echo 'deploying' 
-    	  sh "mkdir -p /var/www/html/rectangles/"
-    	  sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/"	 
+    	  sh "mkdir -p /usr/share/nginx/html/rectangles/"
+    	  sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /usr/share/nginx/html/rectangles/"	 
     	}
      }  
 
