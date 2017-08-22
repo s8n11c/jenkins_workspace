@@ -1,7 +1,6 @@
 pipeline{
-    agent {
-      'slave'
-   }
+ 		
+ 		agent { label 'debian_docker' }
 
 
 
