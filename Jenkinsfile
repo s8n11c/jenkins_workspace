@@ -12,7 +12,7 @@ pipeline{
 
 	stage('Build') {
 		agent {
-          label 'debian_docker && master'
+          label 'debian_docker' && 'master'
         }
 
 	    steps {
