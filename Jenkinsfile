@@ -46,7 +46,7 @@ pipeline{
 
     	steps{
     	  echo 'deploying' 
-    	  sh "cp dist/rectangle_.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/"	 
+    	  sh "cp dist/rectangle*.jar /var/www/html/rectangles/"	 
     	}
      }  
 
