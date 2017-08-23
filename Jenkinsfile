@@ -65,6 +65,21 @@ pipeline{
 
      	}
      }
+	stage('Running on CentOS'){
+     	agent{
+     		docker { 
+     		image 'cemmersb/centos-jdk8'
+     		label 'master'}
+     	}
+
+     	steps{
+     		echo "running on centos container"
+     		sh "wget http://192.168.1.3:9000/rectangles/rectangle_${env.BUILD_NUMBER}.jar"
+     		sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 2 33"
+
+     	}
+     }
+
 
     }
 
