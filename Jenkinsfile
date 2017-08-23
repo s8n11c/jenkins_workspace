@@ -53,7 +53,9 @@ pipeline{
 
      stage('Running on Debian'){
      	agent{
-     		docker 'debian_test'
+     		docker { 
+     		image 'debian_test'
+     		label 'master'}
      	}
 
      	steps{
