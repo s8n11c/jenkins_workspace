@@ -21,7 +21,7 @@ pipeline{
 	    }
 
 	    post {
-    	always{
+    	success{
     		archiveArtifacts artifacts:  'dist/*.jar' ,fingerprint: true
     		}
    		 }
@@ -50,6 +50,18 @@ pipeline{
     	  sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/"	 
     	}
      }  
+
+     stage('Running on Centos'){
+     	agent{
+     		docker 'centos:latest'
+     	}
+
+     	steps{
+     		echo "running oncentos"
+     		sh "wget http://192.168.1.3:9000/rectangles/rectangle_${env.BUILD_NUMBER}.jar"
+     		sh "java -jar rectangle_${env.BUILD_NUMBER}.jar  2 10"
+     	}
+     }
 
     }
 
