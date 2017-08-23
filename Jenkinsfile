@@ -19,6 +19,12 @@ pipeline{
 		echo 'Building.... '
 		sh 'ant '
 	    }
+
+	    post {
+    	success{
+    		archiveArtifacts artifacts:  'dist/*.jar' ,fingerprint: true
+    		}
+   		 }
       }
 
     stage('Testing '){
@@ -47,13 +53,13 @@ pipeline{
 
      stage('Running on Centos'){
      	agent{
-     		docker 'centos:latest'
+     		docker 'debian_test'
      	}
 
      	steps{
      		echo "running oncentos"
      		sh "wget http://192.168.1.3:9000/rectangles/rectangle_${env.BUILD_NUMBER}.jar"
-     		sh "java -jar rectangle_${env.BUILD_NUMBER}.jar  2 10"
+     		sh "java -jar rectangle_${env.BUILD_NUMBER}.jar"
      	}
      }
 
