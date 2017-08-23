@@ -19,12 +19,6 @@ pipeline{
 		echo 'Building.... '
 		sh 'ant '
 	    }
-
-	    post {
-    	success{
-    		archiveArtifacts artifacts:  'dist/*.jar' ,fingerprint: true
-    		}
-   		 }
       }
 
     stage('Testing '){
