@@ -51,7 +51,7 @@ pipeline{
     	}
      }  
 
-     stage('Running on Centos'){
+     stage('Running on Debian'){
      	agent{
      		docker 'debian_test'
      	}
