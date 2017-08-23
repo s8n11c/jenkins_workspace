@@ -46,8 +46,8 @@ pipeline{
 
     	steps{
     	  echo 'deploying' 
-    	  sh "mkdir -p /var/www/html/rectangles/"
-    	  sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/"	 
+    	  sh "mkdir -p /var/www/html/rectangles/all"
+    	  sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all"	 
     	}
      }  
 
@@ -60,7 +60,7 @@ pipeline{
 
      	steps{
      		echo "running on debian container"
-     		sh "wget http://192.168.1.3:9000/rectangles/rectangle_${env.BUILD_NUMBER}.jar"
+     		sh "wget http://192.168.1.3:9000/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
      		sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 2 33"
 
      	}
@@ -74,11 +74,24 @@ pipeline{
 
      	steps{
      		echo "running on centos container"
-     		sh "wget http://192.168.1.3:9000/rectangles/rectangle_${env.BUILD_NUMBER}.jar"
+     		sh "wget http://192.168.1.3:9000/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
      		sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 2 33"
 
      	}
      }
+
+
+    stage('promot to green'){
+    		
+    		agent{
+    			label 'apache'
+    		}
+
+    		steps{
+    		sh 'cp /var/www/html/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.BUILD_NUMBER}.jar'
+    		}
+
+      }
 
 
     }
