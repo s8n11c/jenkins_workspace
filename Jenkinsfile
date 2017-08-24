@@ -1,7 +1,9 @@
 pipeline{
  		
     agent none
-
+    environment{
+    	MAJOR_VERSION = 1
+    }
 
     options{
     	buildDiscarder(logRotator(numToKeepStr: '2',artifactNumToKeepStr: '1'))
@@ -47,7 +49,7 @@ pipeline{
     	steps{
     	  echo 'deploying' 
     	  sh "mkdir -p /var/www/html/rectangles/all/${env.BRANCH_NAME}"
-    	  sh "cp dist/rectangle_${env.BRANCH_NAME}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BRANCH_NAME}/"	 
+    	  sh "cp dist/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BRANCH_NAME}/"	 
     	}
      }  
 
@@ -61,7 +63,7 @@ pipeline{
      	steps{
      		echo "running on debian container"
      		sh "wget http://192.168.1.3:9000/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.BRANCH_NAME}.${env.BUILD_NUMBER}.jar"
-     		sh "java -jar rectangle_${env.BRANCH_NAME}.${env.BUILD_NUMBER}.jar 2 33"
+     		sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 2 33"
 
      	}
      }
@@ -74,8 +76,8 @@ pipeline{
 
      	steps{
      		echo "running on centos container"
-     		sh "wget http://192.168.1.3:9000/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.BRANCH_NAME}.${env.BUILD_NUMBER}.jar"
-     		sh "java -jar rectangle_${env.BRANCH_NAME}.${env.BUILD_NUMBER}.jar 2 33"
+     		sh "wget http://192.168.1.3:9000/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+     		sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 2 33"
      		echo "+ [B]ranch is ${env.BRANCH_NAME}"
 
      	}
@@ -92,7 +94,7 @@ pipeline{
     		}
     		steps{
     		sh 'mkdir -p  /var/www/html/rectangles/green/'
-    		sh "cp /var/www/html/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.BRANCH_NAME}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/"
+    		sh "cp /var/www/html/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/"
     		}
 
       }
