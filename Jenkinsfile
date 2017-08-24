@@ -62,7 +62,7 @@ pipeline{
 
      	steps{
      		echo "running on debian container"
-     		sh "wget http://192.168.1.3:9000/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.BRANCH_NAME}.${env.BUILD_NUMBER}.jar"
+     		sh "wget http://192.168.1.3:9000/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
      		sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 2 33"
 
      	}
