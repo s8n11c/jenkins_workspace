@@ -109,16 +109,14 @@ pipeline{
       steps {
         echo "Stashing Any Local Changes"
         sh 'git stash'
-        echo "Checking Out Development Branch"
         
+        sh 'git checkout development'
+        sh 'git pull origin'
+      
         sh 'git checkout master'
 
-        sh 'git pull origin'
-
         sh 'git merge development'
-
         sh 'git push origin master'
-
         	} 
     	}
 	}
