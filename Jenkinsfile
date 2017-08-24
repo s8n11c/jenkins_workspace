@@ -46,7 +46,7 @@ pipeline{
 
     	steps{
     	  echo 'deploying' 
-    	  sh "mkdir -p /var/www/html/rectangles/all"
+    	  sh "mkdir -p /var/www/html/rectangles/all/${env.BRANCH_NAME}"
     	  sh "cp dist/rectangle_${env.BRANCH_NAME}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BRANCH_NAME}/"	 
     	}
      }  
