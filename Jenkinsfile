@@ -121,7 +121,7 @@ pipeline{
         sh 'git push origin master'
         echo  'tagging '
         sh "git tag rectangle-${MAJOR_VERSION}.${env.BUILD_NUMBER}"
-        sh "git push origin rectangle-${MAJOR_VERSION}.${env.BUILD_NUMBER}""
+        sh "git push origin rectangle-${MAJOR_VERSION}.${env.BUILD_NUMBER}"
         	} 
     	}
 	}
