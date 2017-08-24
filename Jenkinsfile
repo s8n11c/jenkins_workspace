@@ -81,7 +81,7 @@ pipeline{
      }
 
 
-    stage('promot to green'){
+    stage('promote to green'){
     		
     		agent{
     			label 'apache'
