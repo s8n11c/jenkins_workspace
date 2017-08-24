@@ -76,6 +76,7 @@ pipeline{
      		echo "running on centos container"
      		sh "wget http://192.168.1.3:9000/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
      		sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 2 33"
+     		echo "+ [B]ranch is ${env.BRANCH_NAME}"
 
      	}
      }
