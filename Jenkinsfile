@@ -125,6 +125,8 @@ pipeline{
         	} 
     	}
 
+
+    	
     	 post {
         success {
             emailext(
@@ -134,7 +136,8 @@ pipeline{
                 to: "s8n11c@gmail.com"
             )
         }
-    }
+
+     }
 	}
 
 
