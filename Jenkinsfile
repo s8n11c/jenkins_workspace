@@ -124,10 +124,7 @@ pipeline{
         sh "git push origin rectangle-${MAJOR_VERSION}.${env.BUILD_NUMBER}"
         	} 
     	}
-
-
-    	
-    	 post {
+    	post {
         success {
             emailext(
                 subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Ran!",
@@ -136,10 +133,13 @@ pipeline{
                 to: "s8n11c@gmail.com"
             )
         }
+        }
 
-     }
 	}
 
+
+
+    	 
 
 
   }
